@@ -17,7 +17,7 @@
     rgba(10, 12, 17, 0.1);
 
   backdrop-filter: blur(7px);
-  @apply p-4;
+  /* @apply p-4; */
 }
 
 option {
@@ -33,5 +33,24 @@ option {
   --font-roboto: "Roboto", sans-serif;
   --color-next: #24a0b5;
   --color-btn-border: #0e464f;
-  --color-foreground: #07373Fs;
+  --color-foreground: #07373f;
+  --color-ticketborer-active: #197686;
+  --color-ticketbg-active: #12464e;
+}
+
+@layer componenets {
+  .activeticketarticle {
+    background-color: var(--color-ticketbg-active);
+    border: 2px solid var(--color-ticketborer-active);
+  }
+}
+
+th,
+td {
+  @apply p-2;
+  text-wrap: normal;
+}
+
+table label {
+  opacity: 0.3;
 }

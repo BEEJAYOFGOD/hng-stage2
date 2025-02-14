@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import tikcet_bg from "./assets/ticket-bg.svg";
 
-const TicketShowcase = () => {
+const TicketShowcase = ({ email, userName, ticketType, noOfTicket }) => {
   return (
     <div className="text-center">
       <div className="flex justify-between">
@@ -18,7 +19,49 @@ const TicketShowcase = () => {
         className="w-[18.75rem] h-[37.5rem]  m-auto p-[1.3rem] my-12"
         style={{ backgroundImage: `url(${tikcet_bg})` }}
       >
-        <div className="w-[16.25rem] h-[27.875rem] border m-auto rounded-2xl border-next"></div>
+        <div className="w-[16.25rem] h-[27.875rem] border m-auto rounded-2xl border-next p-3">
+          <h2>{`Techember fest "25`}</h2>
+          <p>📍04 Runners road, Ikoyi, Lagos</p>
+          <p>📅 March 15, 2025 | 7:00PM</p>
+
+          <div></div>
+          <table className="table-fixed border-separate border border-gray-400 w-full text-xs rounded-md shadow-md text-left ">
+            <thead>
+              <tr>
+                <th className="border-r border-b border-gray-300 align-top opacity-100">
+                  <label> Enter your name</label>
+                  <p id="ticketcontent" className="text-white opacity-100">
+                    {userName}
+                  </p>
+                </th>
+                <th className="border-b">
+                  <label>Enter your email</label>
+                  <p className="break-words text-white">{email}</p>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="border-r border-b border-gray-300 align-top">
+                  <label>Indiana</label>
+                  <p className="leading-[150%]">{ticketType}</p>
+                </td>
+                <td className="border-b">
+                  <label>Ticket for: </label>
+                  <p>{noOfTicket}</p>
+                </td>
+              </tr>
+              <tr>
+                <td colSpan="2" className=" border-gray-300 align-top">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Minima iste consequuntur repellat? Est asperiores amet, quos
+                  dolore corrupti sequi, velit ullam hic necessitatibus
+                  perspiciatis quis maiores voluptas! Ipsum, cumque magni?
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

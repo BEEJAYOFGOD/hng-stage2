@@ -3,10 +3,9 @@ import { useRef, useState } from "react";
 import cloud from "./assets/cloud-download.svg";
 import envelope from "./assets/envelope.svg";
 
-const UserDetailsForm = () => {
+const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
   const profileUpload = useRef(null);
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
+
   const [fileName, setFileName] = useState("Drag & drop or click to upload");
 
   return (
@@ -27,7 +26,6 @@ const UserDetailsForm = () => {
             profileUpload.current.click();
           }}
           role="button"
-          autoFocus
           tabIndex={0}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
@@ -38,15 +36,14 @@ const UserDetailsForm = () => {
           <img src={cloud} alt="cloud download" />
           <h3>{fileName}</h3>
           <input
+            autoFocus
             required
             className="w-full border hidden"
             ref={profileUpload}
             type="file"
             name="profile_proto"
             id="profile_photo"
-            onChange={(e) => {
-              setFileName(e.target.files[0].name);
-            }}
+            onChange={updateUserInfo}
           ></input>
         </div>
       </div>
@@ -55,14 +52,13 @@ const UserDetailsForm = () => {
       <div className="flex flex-col gap-2 mb-4">
         <label htmlFor="username">Enter your name</label>
         <input
-          name="username"
+          name="userName"
+          value={userName}
           required
           id="username"
-          className="border bg-foreground border-next outline-0 w-full rounded-md p-4"
+          className="border  border-next outline-0 w-full rounded-md p-4"
           type="text"
-          onChange={(e) => {
-            setUserName(e.target.value);
-          }}
+          onChange={updateUserInfo}
         />
       </div>
 
@@ -72,12 +68,11 @@ const UserDetailsForm = () => {
           <input
             required
             name="email"
+            value={email}
             id="email"
             className="outline-0 w-full "
             type="email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
+            onChange={updateUserInfo}
           />
         </div>
       </div>
@@ -90,6 +85,9 @@ const UserDetailsForm = () => {
           className="h-45 border border-next p-4 rounded-md outline-0"
         ></textarea>
       </div>
+      <p className="wrap">
+        {email} {userName}
+      </p>
     </>
   );
 };
