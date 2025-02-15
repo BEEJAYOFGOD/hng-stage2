@@ -120,7 +120,12 @@ const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
             }}
           >
             <div
-              className={`${uploadActionDisplay}  flex-col items-center md:group-hover:flex`}
+              className={
+                `flex-col items-center md:group-hover:flex` +
+                profilePhoto.length
+                  ? "hidden"
+                  : "flex"
+              }
             >
               <img className="w-12" src={cloud} alt="cloud download" />
               <h3>Drag & drop or click to upload</h3>
@@ -141,7 +146,7 @@ const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
           </div>
           <div className="bg-upload-input-bg h-42 w-full absolute top-[15%] z-[-1] md:flex hidden"></div>
         </div>
-        <span className="text-red-600">{imageError}</span>
+        <span className="text-red-600">{profilePhoto ? "" : imageError}</span>
         <span className={uploadState.length ? "flex justify-end" : "hidden"}>
           {uploadState}
         </span>
