@@ -1,7 +1,14 @@
 /* eslint-disable react/prop-types */
 import tikcet_bg from "./assets/ticket-bg.svg";
+import barcode from "./assets/barcode.svg";
 
-const TicketShowcase = ({ email, userName, ticketType, noOfTicket }) => {
+const TicketShowcase = ({
+  email,
+  userName,
+  ticketType,
+  noOfTicket,
+  profilePhoto,
+}) => {
   return (
     <div className="text-center">
       <div className="flex justify-between">
@@ -10,13 +17,14 @@ const TicketShowcase = ({ email, userName, ticketType, noOfTicket }) => {
         <p>Step 3 / 3</p>
       </div>
       <div className="bg-[#0e464e] relative before:absolute before:left-0 h-1 before:h-full before:w-[90%] before:bg-[#23a0b5] my-8"></div>
-
+      <p>{profilePhoto}</p>
+      <p>{"user"}</p>
       <h3 className="text-2xl">Your Ticket is Booked!</h3>
 
       <p>You can download or Chek your email for a copy</p>
 
       <div
-        className="w-[18.75rem] h-[37.5rem]  m-auto p-[1.3rem] my-12"
+        className="w-[18.75rem] h-[37.5rem]  m-auto p-[1.3rem] my-12 bg-cover relative"
         style={{ backgroundImage: `url(${tikcet_bg})` }}
       >
         <div className="w-[16.25rem] h-[27.875rem] border m-auto rounded-2xl border-next p-3">
@@ -24,7 +32,10 @@ const TicketShowcase = ({ email, userName, ticketType, noOfTicket }) => {
           <p>📍04 Runners road, Ikoyi, Lagos</p>
           <p>📅 March 15, 2025 | 7:00PM</p>
 
-          <div></div>
+          <div
+            style={{ backgroundImage: `url(${profilePhoto})` }}
+            className="h-24 w-24 m-auto rounded-md border bg-cover"
+          ></div>
           <table className="table-fixed border-separate border border-gray-400 w-full text-xs rounded-md shadow-md text-left ">
             <thead>
               <tr>
@@ -61,6 +72,9 @@ const TicketShowcase = ({ email, userName, ticketType, noOfTicket }) => {
               </tr>
             </tbody>
           </table>
+        </div>
+        <div className="flex items-center justify-between absolute bottom-4 left-7">
+          <img className="w-full" src={barcode} alt="" />
         </div>
       </div>
     </div>

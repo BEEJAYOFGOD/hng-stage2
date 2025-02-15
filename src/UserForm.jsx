@@ -56,7 +56,9 @@ const SelectTicketForm = ({ noOfTicket, ticketType, updateUserInfo }) => {
               value="FREE"
               ref={ticketFreeRef}
               className="hidden"
-              onChange={updateUserInfo}
+              onChange={(e) => {
+                updateUserInfo(e, e.target.value);
+              }}
             />
             <p>Free</p>
             <p>REGULAR ACCESS</p>
@@ -74,7 +76,9 @@ const SelectTicketForm = ({ noOfTicket, ticketType, updateUserInfo }) => {
               name="ticketType"
               value="VIP"
               ref={ticketVipRef}
-              onChange={updateUserInfo}
+              onChange={(e) => {
+                updateUserInfo(e, e.target.value);
+              }}
               className="hidden"
             />
             <p>VIP</p>
@@ -93,7 +97,9 @@ const SelectTicketForm = ({ noOfTicket, ticketType, updateUserInfo }) => {
               name="ticketType"
               value="VVIP"
               ref={ticketVvipRef}
-              onChange={updateUserInfo}
+              onChange={(e) => {
+                updateUserInfo(e, e.target.value);
+              }}
               className="hidden"
             />
             <p>VVIP</p>
@@ -103,15 +109,16 @@ const SelectTicketForm = ({ noOfTicket, ticketType, updateUserInfo }) => {
         </div>
 
         <p className="mb-4">Number of Tickets</p>
-        <p>{noOfTicket}</p>
 
         <select
-          className="flex justify-between w-full"
+          className="flex justify-between w-full my-4 outline-0 border-next border rounded-md p-3"
           name="noOfTicket"
           id="noOfTicket"
           required
           value={noOfTicket}
-          onChange={updateUserInfo}
+          onChange={(e) => {
+            updateUserInfo(e, e.target.value);
+          }}
         >
           <option value="1">1</option>
           <option value="2">2</option>

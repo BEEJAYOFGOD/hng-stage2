@@ -1,12 +1,46 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-constant-binary-expression */
 import { useRef, useState } from "react";
 import cloud from "./assets/cloud-download.svg";
 import envelope from "./assets/envelope.svg";
+import axios from "axios";
 
-const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
+const UserDetailsForm = ({ userName, email, updateUserInfo, profilePhoto }) => {
   const profileUpload = useRef(null);
 
-  const [fileName, setFileName] = useState("Drag & drop or click to upload");
+  const [uploadActionDisplay, setUploadActionDisplay] = useState("flex");
+
+  const [uploadedImageurl, setUploadedImageUrl] = useState("");
+  const [uploadState, setUploadState] = useState("");
+
+  const handleImageUpload = async (e) => {
+    const image = e.target.files[0];
+    const cloudName = "dvieev0ag";
+    const uploadPreset = "profilePhoto";
+
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("upload_preset", uploadPreset);
+
+    setUploadState("uploading");
+    try {
+      const res = await axios.post(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        formData
+      );
+      const optimizedUrl = res.data.secure_url.replace(
+        "/upload/",
+        "/upload/f_auto,q_auto/"
+      );
+      setUploadedImageUrl(optimizedUrl);
+      console.log("LINK: "+optimizedUrl);
+      setUploadState("");
+      setUploadActionDisplay("hidden");
+      updateUserInfo(e, optimizedUrl);
+    } catch (err) {
+      console.error("Image upload failed:", err);
+    }
+  };
 
   return (
     <>
@@ -17,11 +51,16 @@ const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
 
       <div className="bg-[#0e464e] relative before:absolute h-1 before:h-full before:w-[80%] before:bg-[#23a0b5] my-8"></div>
 
-      <div className="border p-4 rounded-2xl flex flex-col gap-4 border-btn-border">
+      <div className="border p-4 rounded-2xl flex flex-col gap-2 border-btn-border">
         <p>Upload Profile Photo</p>
-
+        <p>{profilePhoto}</p>
         <div
-          className="h-48 border-4 flex flex-col items-center justify-center rounded-4xl border-next"
+          style={{
+            background: "#0E464F",
+            backgroundImage: `url(${uploadedImageurl})`,
+            backgroundSize: "cover",
+          }}
+          className="h-48 border-4 flex flex-col items-center justify-center rounded-4xl border-next group"
           onClick={() => {
             profileUpload.current.click();
           }}
@@ -33,20 +72,34 @@ const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
             }
           }}
         >
-          <img src={cloud} alt="cloud download" />
-          <h3>{fileName}</h3>
+          <div
+            className={`${uploadActionDisplay}
+          flex-col items-center md:group-hover:flex`}
+          >
+            <img className="w-12" src={cloud} alt="cloud download" />
+            <h3>Drag & drop or click to upload</h3>
+          </div>
+
           <input
             autoFocus
-            required
+            accept="image/*"
             className="w-full border hidden"
             ref={profileUpload}
             type="file"
-            name="profile_proto"
+            name="profilePhoto"
             id="profile_photo"
-            onChange={updateUserInfo}
+            onChange={async (e) => {
+              await handleImageUpload(e);
+
+              alert(uploadedImageurl);
+            }}
           ></input>
         </div>
+        <span className={uploadState.length ? "flex justify-end" : "hidden"}>
+          {uploadState}
+        </span>
       </div>
+
       <div className="bg-[#07373F] h-1 relative my-8"></div>
 
       <div className="flex flex-col gap-2 mb-4">
@@ -56,15 +109,18 @@ const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
           value={userName}
           required
           id="username"
-          className="border  border-next outline-0 w-full rounded-md p-4"
+          className="border border-next outline-0 w-full rounded-md p-4"
           type="text"
-          onChange={updateUserInfo}
+          onChange={(e) => {
+            updateUserInfo(e, e.target.value);
+          }}
         />
       </div>
 
       <div className="flex flex-col gap-2 mb-4">
         <label htmlFor="email">Enter your email *</label>
-        <div className="border border-next p-4 rounded-md ">
+        <div className="border border-next p-4 rounded-md flex gap-2">
+          <img src={envelope} alt="" />
           <input
             required
             name="email"
@@ -72,7 +128,9 @@ const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
             id="email"
             className="outline-0 w-full "
             type="email"
-            onChange={updateUserInfo}
+            onChange={(e) => {
+              updateUserInfo(e, e.target.value);
+            }}
           />
         </div>
       </div>
