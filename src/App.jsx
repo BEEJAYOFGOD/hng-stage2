@@ -71,19 +71,17 @@ function App() {
   };
 
   useEffect(() => {
-    const loadPage = window.addEventListener("load", () => {
-      const userjson = JSON.parse(localStorage.getItem("userJson"));
-
-      if (pageIndex) {
-        setUserEventDetails(userjson);
-        setCurrentStepIndex(pageIndex);
-      }
-    });
-
-    return () => {
-      window.removeEventListener("load", loadPage);
-    };
+    // Get saved data from localStorage
+    const savedUserJson = JSON.parse(localStorage.getItem("userJson"));
+    const savedPageIndex = parseInt(localStorage.getItem("pageIndex"));
+  
+    // Check if there's saved data and a valid page index
+    if (savedUserJson && !isNaN(savedPageIndex)) {
+      setUserEventDetails(savedUserJson);
+      setCurrentStepIndex(savedPageIndex);
+    }
   }, []);
+  
   return (
     <>
       <main className="min-h-full bg-[#02191D] p-4 text-white font-roboto ">
