@@ -17,7 +17,7 @@ const TicketShowcase = ({
         <p>Step 3 / 3</p>
       </div>
       <div className="bg-[#0e464e] relative before:absolute before:left-0 h-1 before:h-full before:w-[90%] before:bg-[#23a0b5] my-8"></div>
-      <p>{profilePhoto}</p>
+
       <p>{"user"}</p>
       <h3 className="text-2xl">Your Ticket is Booked!</h3>
 
@@ -27,14 +27,14 @@ const TicketShowcase = ({
         className="w-[18.75rem] h-[37.5rem]  m-auto p-[1.3rem] my-12 bg-cover relative"
         style={{ backgroundImage: `url(${tikcet_bg})` }}
       >
-        <div className="w-[16.25rem] h-[27.875rem] border m-auto rounded-2xl border-next p-3">
-          <h2>{`Techember fest "25`}</h2>
+        <div className="w-[16.25rem] h-[27.875rem] border m-auto rounded-2xl border-next p-2 text-[0.625rem]">
+          <h2 className="font-rage text-3xl">{`Techember fest "25`}</h2>
           <p>📍04 Runners road, Ikoyi, Lagos</p>
           <p>📅 March 15, 2025 | 7:00PM</p>
 
           <div
             style={{ backgroundImage: `url(${profilePhoto})` }}
-            className="h-24 w-24 m-auto rounded-md border bg-cover"
+            className="my-2 h-[5.8rem] w-[5.8rem] m-auto rounded-xl  bg-cover border-4 border-next"
           ></div>
           <table className="table-fixed border-separate border border-gray-400 w-full text-xs rounded-md shadow-md text-left ">
             <thead>
@@ -54,7 +54,7 @@ const TicketShowcase = ({
             <tbody>
               <tr>
                 <td className="border-r border-b border-gray-300 align-top">
-                  <label>Indiana</label>
+                  <label>Ticket Type:</label>
                   <p className="leading-[150%]">{ticketType}</p>
                 </td>
                 <td className="border-b">
@@ -64,10 +64,14 @@ const TicketShowcase = ({
               </tr>
               <tr>
                 <td colSpan="2" className=" border-gray-300 align-top">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Minima iste consequuntur repellat? Est asperiores amet, quos
-                  dolore corrupti sequi, velit ullam hic necessitatibus
-                  perspiciatis quis maiores voluptas! Ipsum, cumque magni?
+                  <label htmlFor="Special request?"></label>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. In
+                    provident magni voluptates animi reprehenderit tempora,
+                    beatae obcaecati consequatur qui, necessitatibus et illum
+                    velit architecto quisquam, amet facere accusamus commodi
+                    ducimus.
+                  </p>
                 </td>
               </tr>
             </tbody>

@@ -33,7 +33,7 @@ const UserDetailsForm = ({ userName, email, updateUserInfo, profilePhoto }) => {
         "/upload/f_auto,q_auto/"
       );
       setUploadedImageUrl(optimizedUrl);
-      console.log("LINK: "+optimizedUrl);
+      console.log("LINK: " + optimizedUrl);
       setUploadState("");
       setUploadActionDisplay("hidden");
       updateUserInfo(e, optimizedUrl);
@@ -53,7 +53,7 @@ const UserDetailsForm = ({ userName, email, updateUserInfo, profilePhoto }) => {
 
       <div className="border p-4 rounded-2xl flex flex-col gap-2 border-btn-border">
         <p>Upload Profile Photo</p>
-        <p>{profilePhoto}</p>
+
         <div
           style={{
             background: "#0E464F",
@@ -90,8 +90,6 @@ const UserDetailsForm = ({ userName, email, updateUserInfo, profilePhoto }) => {
             id="profile_photo"
             onChange={async (e) => {
               await handleImageUpload(e);
-
-              alert(uploadedImageurl);
             }}
           ></input>
         </div>
@@ -143,9 +141,6 @@ const UserDetailsForm = ({ userName, email, updateUserInfo, profilePhoto }) => {
           className="h-45 border border-next p-4 rounded-md outline-0"
         ></textarea>
       </div>
-      <p className="wrap">
-        {email} {userName}
-      </p>
     </>
   );
 };

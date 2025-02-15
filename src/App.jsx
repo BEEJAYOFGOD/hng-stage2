@@ -46,7 +46,6 @@ function App() {
     if (currentStepIndex == 1) {
       const userJson = JSON.stringify(userEventDetails);
 
-      alert(userJson);
       localStorage.setItem("userJson", userJson);
     }
 

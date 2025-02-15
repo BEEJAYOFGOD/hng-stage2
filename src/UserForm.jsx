@@ -81,8 +81,8 @@ const SelectTicketForm = ({ noOfTicket, ticketType, updateUserInfo }) => {
               }}
               className="hidden"
             />
-            <p>VIP</p>
-            <p>REGULAR ACCESS</p>
+            <p>$150</p>
+            <p>VIP ACCESS</p>
             <p>20/52</p>
           </div>
 
@@ -102,8 +102,8 @@ const SelectTicketForm = ({ noOfTicket, ticketType, updateUserInfo }) => {
               }}
               className="hidden"
             />
-            <p>VVIP</p>
-            <p>REGULAR ACCESS</p>
+            <p>$300</p>
+            <p>VVIP ACCESS</p>
             <p>20/52</p>
           </div>
         </div>
