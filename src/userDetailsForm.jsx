@@ -1,21 +1,31 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-constant-binary-expression */
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import cloud from "./assets/cloud-download.svg";
 import envelope from "./assets/envelope.svg";
 import axios from "axios";
 
-const UserDetailsForm = ({ userName, email, updateUserInfo }) => {
+const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
   const profileUpload = useRef(null);
 
   const [uploadActionDisplay, setUploadActionDisplay] = useState("flex");
-  const [uploadedImageurl, setUploadedImageUrl] = useState("");
   const [uploadState, setUploadState] = useState("");
 
   // Validation States
   const [emailError, setEmailError] = useState("");
   const [nameError, setNameError] = useState("");
   const [imageError, setImageError] = useState("no image uploaded");
+
+  useEffect(() => {
+    window.addEventListener("load", () => {
+      const UserDetailsError = JSON.parse(
+        localStorage.getItem("userDetailsError")
+      );
+
+      setImageError(UserDetailsError.imageError);
+      setUploadActionDisplay(UserDetailsError.uploadActionDisplay);
+    });
+  }, []);
 
   const handleImageUpload = async (e) => {
     const image = e.target.files[0];
@@ -36,10 +46,17 @@ const UserDetailsForm = ({ userName, email, updateUserInfo }) => {
         "/upload/",
         "/upload/f_auto,q_auto/"
       );
-      setUploadedImageUrl(optimizedUrl);
+
       setUploadState("");
       setUploadActionDisplay("hidden");
+
       updateUserInfo(e, optimizedUrl);
+
+      const errorInfo = JSON.stringify({
+        imageError: "",
+        uploadActionDisplay: "hidden",
+      });
+      localStorage.setItem("userDetailsError", errorInfo);
       setImageError("");
     } catch (err) {
       console.error("Image upload failed:", err);
@@ -87,7 +104,7 @@ const UserDetailsForm = ({ userName, email, updateUserInfo }) => {
           <div
             style={{
               background: "#0E464F",
-              backgroundImage: `url(${uploadedImageurl})`,
+              backgroundImage: `url(${profilePhoto})`,
               backgroundSize: "cover",
             }}
             className="h-48 border-4 flex flex-col items-center justify-center rounded-4xl border-next group md:w-[15rem] md:h-[15rem] md:mx-auto"
@@ -103,7 +120,7 @@ const UserDetailsForm = ({ userName, email, updateUserInfo }) => {
             }}
           >
             <div
-              className={`${uploadActionDisplay} flex-col items-center md:group-hover:flex`}
+              className={`${uploadActionDisplay}  flex-col items-center md:group-hover:flex`}
             >
               <img className="w-12" src={cloud} alt="cloud download" />
               <h3>Drag & drop or click to upload</h3>
@@ -124,7 +141,7 @@ const UserDetailsForm = ({ userName, email, updateUserInfo }) => {
           </div>
           <div className="bg-upload-input-bg h-42 w-full absolute top-[15%] z-[-1] md:flex hidden"></div>
         </div>
-        <span>{imageError}</span>
+        <span className="text-red-600">{imageError}</span>
         <span className={uploadState.length ? "flex justify-end" : "hidden"}>
           {uploadState}
         </span>

@@ -16,15 +16,23 @@ function App() {
     profilePhoto: "",
   };
   const [userEventDetails, setUserEventDetails] = useState(defualtUserInfo);
+  let userJson;
 
   const updateUserInfo = (event, value) => {
     setUserEventDetails((prev) => {
-      return {
+      ////////////////////////
+      const updatedDetails = {
         ...prev,
         [event.target.name]: value,
       };
+      ///////////////////////
+      userJson = JSON.stringify(updatedDetails);
+      localStorage.setItem("userJson", userJson);
+      //////////////////////
+      return updatedDetails;
     });
   };
+
   // console.log("DEBUG:", defualtUserInfo);
   const {
     currentStepIndex,
@@ -39,17 +47,12 @@ function App() {
     <TicketShowcase {...userEventDetails} updateUserInfo={updateUserInfo} />,
   ]);
 
-  let pageIndex;
-
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    if (currentStepIndex == 1) {
-      const userJson = JSON.stringify(userEventDetails);
 
-      localStorage.setItem("userJson", userJson);
-    }
-
-    pageIndex = localStorage.setItem("pageIndex", currentStepIndex + 1);
+    localStorage.setItem("pageIndex", currentStepIndex + 1);
+    userJson = JSON.stringify(userEventDetails);
+    localStorage.setItem("userJson", userJson);
 
     // if (
     //   (currentStepIndex == 1 && userEventDetails.userName.length <= 0) ||
@@ -74,14 +77,14 @@ function App() {
     // Get saved data from localStorage
     const savedUserJson = JSON.parse(localStorage.getItem("userJson"));
     const savedPageIndex = parseInt(localStorage.getItem("pageIndex"));
-  
+
     // Check if there's saved data and a valid page index
     if (savedUserJson && !isNaN(savedPageIndex)) {
       setUserEventDetails(savedUserJson);
       setCurrentStepIndex(savedPageIndex);
     }
   }, []);
-  
+
   return (
     <>
       <main className="min-h-full bg-[#02191D] p-4 text-white font-roboto ">
@@ -94,7 +97,10 @@ function App() {
           {step}
 
           <div className="flex flex-col gap-4 md:flex-row-reverse md:gap-2">
-            <button className="bg-next rounded-md py-2 flex-1" type="submit">
+            <button
+              className="bg-next rounded-md py-2 flex-1 cursor-pointer"
+              type="submit"
+            >
               {currentStepIndex == 0
                 ? "Next"
                 : currentStepIndex == 1
@@ -103,10 +109,15 @@ function App() {
             </button>
             <button
               type="button"
-              className="border border-next rounded-md py-2 flex-1"
+              className="border border-next rounded-md py-2 flex-1 cursor-pointer"
               onClick={() => {
+                localStorage.setItem("pageIndex", currentStepIndex - 1);
+
                 if (isLastStep) {
                   setUserEventDetails(defualtUserInfo);
+                  userJson = JSON.stringify(userEventDetails);
+                  localStorage.setItem("userJson", userJson);
+                  localStorage.setItem("pageIndex", 0);
                   next();
                 } else {
                   back();

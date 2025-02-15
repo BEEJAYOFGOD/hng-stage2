@@ -12,7 +12,7 @@ const useMultiStepForm = (steps) => {
 
   function back() {
     setCurrentStepIndex((index) => {
-      if (index <= 0) return steps.length - 1; // If on the first step, go to the last step
+      if (index <= 0) return 0; // If on the first step, go to the last step
       return index - 1; // Otherwise, go back one step
     });
   }
