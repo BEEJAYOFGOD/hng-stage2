@@ -71,7 +71,7 @@ function App() {
   };
 
   useEffect(() => {
-    window.addEventListener("load", () => {
+    const loadPage = window.addEventListener("load", () => {
       const userjson = JSON.parse(localStorage.getItem("userJson"));
 
       if (pageIndex) {
@@ -79,24 +79,24 @@ function App() {
         setCurrentStepIndex(pageIndex);
       }
     });
+
+    return () => {
+      window.removeEventListener("load", loadPage);
+    };
   }, []);
   return (
     <>
-      <main className="min-h-full bg-[#02191D] p-4 text-white font-roboto">
+      <main className="min-h-full bg-[#02191D] p-4 text-white font-roboto ">
         <Navbar />
 
         <form
           onSubmit={handleFormSubmit}
-          className="border border-btn-border rounded-2xl p-4 mt-8"
+          className="border border-btn-border rounded-2xl p-4 md:p-8 mt-8 max-w-[43.75rem] m-auto md:rounded-4xl"
         >
           {step}
 
-          <div className="flex flex-col gap-4">
-            <button
-              className="bg-next rounded-md py-2"
-              type="submit"
-              // onClick={next}
-            >
+          <div className="flex flex-col gap-4 md:flex-row-reverse md:gap-2">
+            <button className="bg-next rounded-md py-2 flex-1" type="submit">
               {currentStepIndex == 0
                 ? "Next"
                 : currentStepIndex == 1
@@ -105,7 +105,7 @@ function App() {
             </button>
             <button
               type="button"
-              className="border border-next rounded-md py-2"
+              className="border border-next rounded-md py-2 flex-1"
               onClick={() => {
                 if (isLastStep) {
                   setUserEventDetails(defualtUserInfo);

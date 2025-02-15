@@ -18,15 +18,24 @@ const SelectTicketForm = ({ noOfTicket, ticketType, updateUserInfo }) => {
     else if (ticket === "VVIP") ticketVvipRef.current.click();
   };
 
+  const ticketOptions = [
+    {
+      type: "FREE",
+      price: "Free",
+      access: "REGULAR ACCESS",
+      available: "20/52",
+    },
+    { type: "VIP", price: "$150", access: "VIP ACCESS", available: "20/52" },
+    { type: "VVIP", price: "$300", access: "VVIP ACCESS", available: "20/52" },
+  ];
   return (
     <>
       <div>
         <div className="rounded-2xl">
           <h1>Ticket Selection</h1>
           <p>Step 1 / 3</p>
-          <p>{ticketType}</p>
 
-          <div className="bg-[#0e464e] relative before:absolute h-1 before:h-full before:w-[70%] before:bg-[#23a0b5] my-6"></div>
+          <div className="bg-[#0e464e] relative before:absolute h-1 before:h-full before:w-[70%] before:bg-[#23a0b5] my-6 rounded-md before:rounded-md"></div>
 
           <div className="text-center event_div">
             <h2 className="font-rage text-6xl leading-normal">
@@ -43,69 +52,36 @@ const SelectTicketForm = ({ noOfTicket, ticketType, updateUserInfo }) => {
         <div className="bg-[#07373F] h-1 relative my-8"></div>
 
         <h3>Select Ticket Type</h3>
-        <div className="mb-8 border rounded-2xl p-3 border-foreground flex flex-col gap-4">
-          <div
-            className={`border-[#197686] p-3 border-2 rounded-xl cursor-pointer ${
-              selectedTicket === "FREE" ? "activeticketarticle" : ""
-            }`}
-            onClick={() => handleTicketClick("FREE")}
-          >
-            <input
-              type="radio"
-              name="ticketType"
-              value="FREE"
-              ref={ticketFreeRef}
-              className="hidden"
-              onChange={(e) => {
-                updateUserInfo(e, e.target.value);
-              }}
-            />
-            <p>Free</p>
-            <p>REGULAR ACCESS</p>
-            <p>20/52</p>
-          </div>
-
-          <div
-            className={`border-[#197686] p-3 border-2 rounded-xl cursor-pointer ${
-              selectedTicket === "VIP" ? "activeticketarticle" : ""
-            }`}
-            onClick={() => handleTicketClick("VIP")}
-          >
-            <input
-              type="radio"
-              name="ticketType"
-              value="VIP"
-              ref={ticketVipRef}
-              onChange={(e) => {
-                updateUserInfo(e, e.target.value);
-              }}
-              className="hidden"
-            />
-            <p>$150</p>
-            <p>VIP ACCESS</p>
-            <p>20/52</p>
-          </div>
-
-          <div
-            className={`border-[#197686] p-3 border-2 rounded-xl cursor-pointer ${
-              selectedTicket === "VVIP" ? "activeticketarticle" : ""
-            }`}
-            onClick={() => handleTicketClick("VVIP")}
-          >
-            <input
-              type="radio"
-              name="ticketType"
-              value="VVIP"
-              ref={ticketVvipRef}
-              onChange={(e) => {
-                updateUserInfo(e, e.target.value);
-              }}
-              className="hidden"
-            />
-            <p>$300</p>
-            <p>VVIP ACCESS</p>
-            <p>20/52</p>
-          </div>
+        <div className="mb-8 border rounded-2xl p-3 border-foreground flex flex-col gap-4 md:flex-row md:items-stretch">
+          {ticketOptions.map((ticket) => (
+            <div
+              key={ticket.type}
+              className={`border-[#197686] p-3 border-2 rounded-xl cursor-pointer flex-1 min-w-0 md:basis-1/3 ${
+                selectedTicket === ticket.type ? "activeticketarticle" : ""
+              }`}
+              onClick={() => handleTicketClick(ticket.type)}
+            >
+              <input
+                type="radio"
+                name="ticketType"
+                value={ticket.type}
+                ref={
+                  ticket.type === "FREE"
+                    ? ticketFreeRef
+                    : ticket.type === "VIP"
+                    ? ticketVipRef
+                    : ticketVvipRef
+                }
+                className="hidden"
+                onChange={(e) => {
+                  updateUserInfo(e, e.target.value);
+                }}
+              />
+              <p className="text-2xl font-bold">{ticket.price}</p>
+              <p className="text-base">{ticket.access}</p>
+              <p className="text-sm opacity-60">{ticket.available}</p>
+            </div>
+          ))}
         </div>
 
         <p className="mb-4">Number of Tickets</p>

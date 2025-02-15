@@ -83,44 +83,46 @@ const UserDetailsForm = ({ userName, email, updateUserInfo }) => {
 
       <div className="border p-4 rounded-2xl flex flex-col gap-2 border-btn-border">
         <p>Upload Profile Photo</p>
-
-        <div
-          style={{
-            background: "#0E464F",
-            backgroundImage: `url(${uploadedImageurl})`,
-            backgroundSize: "cover",
-          }}
-          className="h-48 border-4 flex flex-col items-center justify-center rounded-4xl border-next group"
-          onClick={() => {
-            profileUpload.current.click();
-          }}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              profileUpload.current.click();
-            }
-          }}
-        >
+        <div className="relative z-100">
           <div
-            className={`${uploadActionDisplay} flex-col items-center md:group-hover:flex`}
-          >
-            <img className="w-12" src={cloud} alt="cloud download" />
-            <h3>Drag & drop or click to upload</h3>
-          </div>
-
-          <input
-            autoFocus
-            accept="image/*"
-            className="w-full border hidden"
-            ref={profileUpload}
-            type="file"
-            name="profilePhoto"
-            id="profile_photo"
-            onChange={async (e) => {
-              await handleImageUpload(e);
+            style={{
+              background: "#0E464F",
+              backgroundImage: `url(${uploadedImageurl})`,
+              backgroundSize: "cover",
             }}
-          />
+            className="h-48 border-4 flex flex-col items-center justify-center rounded-4xl border-next group md:w-[15rem] md:h-[15rem] md:mx-auto"
+            onClick={() => {
+              profileUpload.current.click();
+            }}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                profileUpload.current.click();
+              }
+            }}
+          >
+            <div
+              className={`${uploadActionDisplay} flex-col items-center md:group-hover:flex`}
+            >
+              <img className="w-12" src={cloud} alt="cloud download" />
+              <h3>Drag & drop or click to upload</h3>
+            </div>
+
+            <input
+              autoFocus
+              accept="image/*"
+              className="w-full border hidden"
+              ref={profileUpload}
+              type="file"
+              name="profilePhoto"
+              id="profile_photo"
+              onChange={async (e) => {
+                await handleImageUpload(e);
+              }}
+            />
+          </div>
+          <div className="bg-upload-input-bg h-42 w-full absolute top-[15%] z-[-1] md:flex hidden"></div>
         </div>
         <span>{imageError}</span>
         <span className={uploadState.length ? "flex justify-end" : "hidden"}>

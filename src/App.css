@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Road+Rage&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alatsi&family=Road+Rage&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
 .event_div {
@@ -37,6 +37,8 @@ option {
   --color-foreground: #07373f;
   --color-ticketborer-active: #197686;
   --color-ticketbg-active: #12464e;
+  --color-upload-input-bg: rgba(0, 0, 0, 0.2);
+  --font-alatsi: "Alatsi", sans-serif;
 }
 
 @layer componenets {

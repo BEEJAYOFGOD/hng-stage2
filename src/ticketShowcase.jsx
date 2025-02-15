@@ -16,12 +16,13 @@ const TicketShowcase = ({
 
         <p>Step 3 / 3</p>
       </div>
-      <div className="bg-[#0e464e] relative before:absolute before:left-0 h-1 before:h-full before:w-[90%] before:bg-[#23a0b5] my-8"></div>
+      <div className="bg-[#0e464e] relative before:absolute before:left-0 h-1 before:h-full before:w-[90%] before:bg-[#23a0b5] my-8 before:rounded-2xl rounded-2xl"></div>
 
-      <p>{"user"}</p>
-      <h3 className="text-2xl">Your Ticket is Booked!</h3>
+      <h3 className="text-4xl font-bold font-alatsi">Your Ticket is Booked!</h3>
 
-      <p>You can download or Chek your email for a copy</p>
+      <p className="text-base">
+        You can download or Chek your email for a copy
+      </p>
 
       <div
         className="w-[18.75rem] h-[37.5rem]  m-auto p-[1.3rem] my-12 bg-cover relative"
@@ -36,7 +37,7 @@ const TicketShowcase = ({
             style={{ backgroundImage: `url(${profilePhoto})` }}
             className="my-2 h-[5.8rem] w-[5.8rem] m-auto rounded-xl  bg-cover border-4 border-next"
           ></div>
-          <table className="table-fixed border-separate border border-gray-400 w-full text-xs rounded-md shadow-md text-left ">
+          <table className="table-fixed border-separate border border-[#133D44] w-full text-xs rounded-md shadow-md text-left ">
             <thead>
               <tr>
                 <th className="border-r border-b border-gray-300 align-top opacity-100">
