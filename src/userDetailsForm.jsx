@@ -8,7 +8,6 @@ import axios from "axios";
 const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
   const profileUpload = useRef(null);
 
-  const [uploadActionDisplay, setUploadActionDisplay] = useState("flex");
   const [uploadState, setUploadState] = useState("");
 
   // Validation States
@@ -23,7 +22,6 @@ const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
       );
 
       setImageError(UserDetailsError.imageError);
-      setUploadActionDisplay(UserDetailsError.uploadActionDisplay);
     });
   }, []);
 
@@ -48,15 +46,9 @@ const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
       );
 
       setUploadState("");
-      setUploadActionDisplay("hidden");
 
       updateUserInfo(e, optimizedUrl);
 
-      const errorInfo = JSON.stringify({
-        imageError: "",
-        uploadActionDisplay: "hidden",
-      });
-      localStorage.setItem("userDetailsError", errorInfo);
       setImageError("");
     } catch (err) {
       console.error("Image upload failed:", err);
@@ -96,7 +88,7 @@ const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
         <p>Step 2/ 3</p>
       </div>
 
-      <div className="bg-[#0e464e] relative before:absolute h-1 before:h-full before:w-[80%] before:bg-[#23a0b5] my-8"></div>
+      <div className="bg-[#0e464e] relative before:absolute h-1 before:h-full before:w-[80%] before:bg-[#23a0b5] my-8 before:rounded-3xl rounded-3xl"></div>
 
       <div className="border p-4 rounded-2xl flex flex-col gap-2 border-btn-border">
         <p>Upload Profile Photo</p>
@@ -107,7 +99,7 @@ const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
               backgroundImage: `url(${profilePhoto})`,
               backgroundSize: "cover",
             }}
-            className="h-48 border-4 flex flex-col items-center justify-center rounded-4xl border-next group md:w-[15rem] md:h-[15rem] md:mx-auto"
+            className="h-48 border-4 flex flex-col items-center justify-center rounded-4xl border-next group md:w-[15rem] md:h-[15rem] md:mx-auto hover:opacity-65"
             onClick={() => {
               profileUpload.current.click();
             }}
@@ -122,8 +114,8 @@ const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
             <div
               className={
                 profilePhoto.length
-                  ? "hidden flex-col items-center md:group-hover:flex flex`"
-                  : "flex flex-col items-center md:group-hover:flex"
+                  ? "hidden flex-col items-center md:group-hover:flex group-hover:opacity-100"
+                  : "flex flex-col items-center "
               }
             >
               <img className="w-12" src={cloud} alt="cloud download" />
