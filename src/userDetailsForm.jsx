@@ -5,13 +5,17 @@ import cloud from "./assets/cloud-download.svg";
 import envelope from "./assets/envelope.svg";
 import axios from "axios";
 
-const UserDetailsForm = ({ userName, email, updateUserInfo, profilePhoto }) => {
+const UserDetailsForm = ({ userName, email, updateUserInfo }) => {
   const profileUpload = useRef(null);
 
   const [uploadActionDisplay, setUploadActionDisplay] = useState("flex");
-
   const [uploadedImageurl, setUploadedImageUrl] = useState("");
   const [uploadState, setUploadState] = useState("");
+
+  // Validation States
+  const [emailError, setEmailError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [imageError, setImageError] = useState("no image uploaded");
 
   const handleImageUpload = async (e) => {
     const image = e.target.files[0];
@@ -33,13 +37,39 @@ const UserDetailsForm = ({ userName, email, updateUserInfo, profilePhoto }) => {
         "/upload/f_auto,q_auto/"
       );
       setUploadedImageUrl(optimizedUrl);
-      console.log("LINK: " + optimizedUrl);
       setUploadState("");
       setUploadActionDisplay("hidden");
       updateUserInfo(e, optimizedUrl);
+      setImageError("");
     } catch (err) {
       console.error("Image upload failed:", err);
     }
+  };
+
+  // Validation Handlers
+  const validateName = (name) => {
+    if (!name.trim()) {
+      setNameError("Name is required.");
+      return false;
+    } else if (name.length < 3) {
+      setNameError("Name must be at least 3 characters long.");
+      return false;
+    }
+    setNameError("");
+    return true;
+  };
+
+  const validateEmail = (email) => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.trim()) {
+      setEmailError("Email is required.");
+      return false;
+    } else if (!emailPattern.test(email)) {
+      setEmailError("Please enter a valid email address.");
+      return false;
+    }
+    setEmailError("");
+    return true;
   };
 
   return (
@@ -73,8 +103,7 @@ const UserDetailsForm = ({ userName, email, updateUserInfo, profilePhoto }) => {
           }}
         >
           <div
-            className={`${uploadActionDisplay}
-          flex-col items-center md:group-hover:flex`}
+            className={`${uploadActionDisplay} flex-col items-center md:group-hover:flex`}
           >
             <img className="w-12" src={cloud} alt="cloud download" />
             <h3>Drag & drop or click to upload</h3>
@@ -91,8 +120,9 @@ const UserDetailsForm = ({ userName, email, updateUserInfo, profilePhoto }) => {
             onChange={async (e) => {
               await handleImageUpload(e);
             }}
-          ></input>
+          />
         </div>
+        <span>{imageError}</span>
         <span className={uploadState.length ? "flex justify-end" : "hidden"}>
           {uploadState}
         </span>
@@ -109,10 +139,21 @@ const UserDetailsForm = ({ userName, email, updateUserInfo, profilePhoto }) => {
           id="username"
           className="border border-next outline-0 w-full rounded-md p-4"
           type="text"
+          aria-invalid={nameError ? "true" : "false"}
           onChange={(e) => {
             updateUserInfo(e, e.target.value);
+            validateName(e.target.value);
           }}
+          onBlur={(e) => validateName(e.target.value)}
         />
+        <p
+          className="text-red-600 text-sm"
+          aria-live="polite"
+          role="alert"
+          id="name-error"
+        >
+          {nameError}
+        </p>
       </div>
 
       <div className="flex flex-col gap-2 mb-4">
@@ -124,18 +165,31 @@ const UserDetailsForm = ({ userName, email, updateUserInfo, profilePhoto }) => {
             name="email"
             value={email}
             id="email"
-            className="outline-0 w-full "
+            className="outline-0 w-full"
             type="email"
+            aria-invalid={emailError ? "true" : "false"}
             onChange={(e) => {
               updateUserInfo(e, e.target.value);
+              validateEmail(e.target.value);
             }}
+            onBlur={(e) => validateEmail(e.target.value)}
           />
         </div>
+        <p
+          className="text-red-600 text-sm"
+          aria-live="polite"
+          role="alert"
+          id="email-error"
+        >
+          {emailError}
+        </p>
       </div>
+
       <div className="flex flex-col gap-2 mb-4">
         <label htmlFor="about">About the project</label>
 
         <textarea
+          rows="2"
           placeholder="About the project"
           required
           className="h-45 border border-next p-4 rounded-md outline-0"

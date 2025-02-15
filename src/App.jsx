@@ -51,6 +51,22 @@ function App() {
 
     pageIndex = localStorage.setItem("pageIndex", currentStepIndex + 1);
 
+    // if (
+    //   (currentStepIndex == 1 && userEventDetails.userName.length <= 0) ||
+    //   userEventDetails.email.length <= 3 ||
+    //   userEventDetails.profilePhoto.length == 0
+    // ) {
+    //   return;
+    // }
+    if (currentStepIndex == 1) {
+      if (
+        userEventDetails.userName.length <= 0 ||
+        userEventDetails.email.length <= 3 ||
+        userEventDetails.profilePhoto.length == 0
+      ) {
+        return;
+      }
+    }
     next();
   };
 
