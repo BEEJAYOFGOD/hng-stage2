@@ -121,10 +121,9 @@ const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
           >
             <div
               className={
-                `flex-col items-center md:group-hover:flex` +
                 profilePhoto.length
-                  ? "hidden"
-                  : "flex"
+                  ? "hidden flex-col items-center md:group-hover:flex flex`"
+                  : "flex flex-col items-center md:group-hover:flex"
               }
             >
               <img className="w-12" src={cloud} alt="cloud download" />
