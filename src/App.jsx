@@ -87,12 +87,12 @@ function App() {
 
   return (
     <>
-      <main className="min-h-full bg-[#02191D] p-4 text-white font-roboto ">
+      <main className="min-h-full bg-[#02191D] p-4 text-white font-roboto md:pb-32 md:bg-[radial-gradient(52.52%_32.71%_at_50%_97.66%,_rgba(36,160,181,0.2)_0%,_rgba(36,160,181,0)_100%)]">
         <Navbar />
 
         <form
           onSubmit={handleFormSubmit}
-          className="border border-btn-border rounded-2xl p-4 md:p-8 mt-8 max-w-[43.75rem] m-auto md:rounded-4xl"
+          className="border border-btn-border rounded-2xl p-4 md:p-8 mt-8 max-w-[43.75rem] m-auto md:rounded-4xl bg-[#08252B]"
         >
           {step}
 

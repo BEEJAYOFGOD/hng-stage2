@@ -9,10 +9,25 @@ const Navbar = () => {
         <img className="w-32" src={companyLogo} alt="techLogo" />
       </div>
 
-      <div>
-        <Link href="">Events</Link>
-        <a href="">My Tickets</a>
-        <a href="/about">About Project</a>
+      <div className="flex gap-4">
+        <a
+          className="opacity-80 hover:opacity-80 active:opacity-100 visited:opacity-100 md:opacity-80 md:hover:opacity-80 md:active:opacity-100"
+          to="/"
+        >
+          Events
+        </a>
+        <a
+          className="opacity-80 hover:opacity-80 active:opacity-100 visited:opacity-100 md:opacity-80 md:hover:opacity-80 md:active:opacity-100"
+          to="/"
+        >
+          My Tickets
+        </a>
+        <a
+          className="opacity-80 hover:opacity-80 active:opacity-100 visited:opacity-100 md:opacity-80 md:hover:opacity-80 md:active:opacity-100"
+          to="/about"
+        >
+          About
+        </a>
       </div>
       <div>
         <button className="text-sm bg-white rounded-2xl text-black flex gap-2 items-center px-4 py-4">
