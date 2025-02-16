@@ -91,7 +91,11 @@ function App() {
       <main className="min-h-full bg-[#02191D] p-4 text-white font-roboto md:pb-32 md:bg-[radial-gradient(52.52%_32.71%_at_50%_97.66%,_rgba(36,160,181,0.2)_0%,_rgba(36,160,181,0)_100%)]">
         <Navbar />
 
-        <div className="border border-btn-border max-w-[43.75rem] rounded-4xl  p-6 m-auto md:bg-[#041E23] bg-[#08252B] mt-10">
+        <div
+          className={`border border-btn-border max-w-[43.75rem] rounded-4xl  p-5 m-auto md:bg-[#041E23] ${
+            currentStepIndex != 2 ? "bg-[#08252B]" : "bg-[#041E23]"
+          }  mt-10`}
+        >
           <div className="flex justify-between">
             <h1>
               {currentStepIndex === 0
@@ -128,11 +132,13 @@ function App() {
                 className="bg-next rounded-md py-2 flex-1 cursor-pointer"
                 type="submit"
               >
-                {currentStepIndex == 0
-                  ? "Next"
-                  : currentStepIndex == 1
-                  ? `Get Your ${userEventDetails.ticketType} Tickets`
-                  : "Download Ticket"}
+                <span className="capitalize">
+                  {currentStepIndex == 0
+                    ? "Next"
+                    : currentStepIndex == 1
+                    ? `Get Your ${userEventDetails.ticketType.toLowerCase()} Tickets`
+                    : "Download Ticket"}
+                </span>
               </button>
               <button
                 type="button"
@@ -151,11 +157,13 @@ function App() {
                   }
                 }}
               >
-                {currentStepIndex == 0
-                  ? "Cancel"
-                  : currentStepIndex == 1
-                  ? "Back"
-                  : "Book Another Ticket"}
+                <span className="capitalize">
+                  {currentStepIndex == 0
+                    ? "Cancel"
+                    : currentStepIndex == 1
+                    ? "Back"
+                    : "Book Another Ticket"}
+                </span>
               </button>
             </div>
           </form>

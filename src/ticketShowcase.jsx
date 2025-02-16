@@ -11,12 +11,6 @@ const TicketShowcase = ({
 }) => {
   return (
     <div className="text-center">
-      <div className="flex justify-between">
-        <h2>Ready</h2>
-
-        <p>Step 3 / 3</p>
-      </div>
-
       <h3 className="md:text-4xl text-3xl font-bold font-alatsi">
         Your Ticket is Booked!
       </h3>
@@ -29,7 +23,7 @@ const TicketShowcase = ({
         className="w-[18.75rem] h-[37.5rem]  m-auto p-[1.3rem] my-12 bg-cover relative"
         style={{ backgroundImage: `url(${tikcet_bg})` }}
       >
-        <div className="w-[16.25rem] h-[27.875rem] border m-auto rounded-2xl border-next p-2 text-[0.625rem]">
+        <div className="w-[16.25rem] h-[27.875rem] border m-auto rounded-2xl border-next p-2 text-[0.625rem] ">
           <h2 className="font-rage text-3xl">{`Techember fest "25`}</h2>
           <p>📍04 Runners road, Ikoyi, Lagos</p>
           <p>📅 March 15, 2025 | 7:00PM</p>
