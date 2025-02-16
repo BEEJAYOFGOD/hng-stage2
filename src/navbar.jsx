@@ -9,21 +9,21 @@ const Navbar = () => {
         <img className="w-32" src={companyLogo} alt="techLogo" />
       </div>
 
-      <div className="flex gap-4">
+      <div className="flex gap-4 font-roboto">
         <a
-          className="opacity-80 hover:opacity-80 active:opacity-100 visited:opacity-100 md:opacity-80 md:hover:opacity-80 md:active:opacity-100"
+          className="opacity-80 hover:opacity-80 active:opacity-100 visited:opacity-100 md:opacity-80 md:hover:opacity-80 md:active:opacity-100 cursor-pointer"
           to="/"
         >
           Events
         </a>
         <a
-          className="opacity-80 hover:opacity-80 active:opacity-100 visited:opacity-100 md:opacity-80 md:hover:opacity-80 md:active:opacity-100"
+          className="opacity-80 hover:opacity-80 active:opacity-100 visited:opacity-100 md:opacity-80 md:hover:opacity-80 md:active:opacity-100 cursor-pointer"
           to="/"
         >
           My Tickets
         </a>
         <a
-          className="opacity-80 hover:opacity-80 active:opacity-100 visited:opacity-100 md:opacity-80 md:hover:opacity-80 md:active:opacity-100"
+          className="opacity-80 hover:opacity-80 active:opacity-100 visited:opacity-100 md:opacity-80 md:hover:opacity-80 md:active:opacity-100 cursor-pointer"
           to="/about"
         >
           About
