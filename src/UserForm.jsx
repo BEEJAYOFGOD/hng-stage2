@@ -56,7 +56,7 @@ const SelectTicketForm = ({ noOfTicket, ticketType, updateUserInfo }) => {
           {ticketOptions.map((ticket) => (
             <div
               key={ticket.type}
-              className={`border-[#197686] p-3 border-2 rounded-xl cursor-pointer flex-1 min-w-0 md:basis-1/3 ${
+              className={`border-[#197686] p-3 border-2 rounded-xl cursor-pointer flex-1 min-w-0 md:basis-1/3 md:hover:bg-[#2C545B] ${
                 selectedTicket === ticket.type ? "activeticketarticle" : ""
               }`}
               onClick={() => handleTicketClick(ticket.type)}

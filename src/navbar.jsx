@@ -1,11 +1,18 @@
 import companyLogo from "./assets/compLogo.svg";
 import line from "./assets/Line.svg";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <nav className="flex rounded-2xl font-['JejuMyeongjo'] items-center p-4 justify-between  bg-[#052F35] border border-[#197686]">
       <div>
         <img className="w-32" src={companyLogo} alt="techLogo" />
+      </div>
+
+      <div>
+        <Link href="">Events</Link>
+        <a href="">My Tickets</a>
+        <a href="/about">About Project</a>
       </div>
       <div>
         <button className="text-sm bg-white rounded-2xl text-black flex gap-2 items-center px-4 py-4">
