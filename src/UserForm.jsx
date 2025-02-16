@@ -41,7 +41,7 @@ const SelectTicketForm = ({ noOfTicket, ticketType, updateUserInfo }) => {
               your spot now
             </p>
 
-            <div className="flex justify-center gap-4">
+            <div className="md:flex justify-center gap-4 mt-8 md:mt-4">
               <p>📍 [Event Location]</p>
               <p className="hidden md:flex">||</p>
               <p>March 15, 2025 | 7:00Pm</p>

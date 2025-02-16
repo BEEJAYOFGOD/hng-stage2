@@ -46,11 +46,11 @@ const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
       );
 
       setUploadState("");
+      setImageError("");
 
       updateUserInfo(e, optimizedUrl);
     } catch (err) {
       console.error("Image upload failed:", err);
-      setImageError("");
     }
   };
 
