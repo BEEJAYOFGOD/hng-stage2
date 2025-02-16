@@ -123,7 +123,11 @@ function App() {
 
           <form
             onSubmit={handleFormSubmit}
-            className="md:border md:border-btn-border rounded-2xl p-0 md:p-8 mt-8  m-auto md:rounded-4xl md:bg-[#08252B]"
+            className={` ${
+              currentStepIndex !== 2
+                ? "md:border-btn-border md:border md:bg-[#08252B]"
+                : ""
+            }   rounded-2xl p-0 md:p-8 mt-8  m-auto md:rounded-4xl `}
           >
             {step}
 
