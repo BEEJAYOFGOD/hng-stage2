@@ -48,10 +48,9 @@ const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
       setUploadState("");
 
       updateUserInfo(e, optimizedUrl);
-
-      setImageError("");
     } catch (err) {
       console.error("Image upload failed:", err);
+      setImageError("");
     }
   };
 
@@ -88,7 +87,6 @@ const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
         <p>Step 2/ 3</p>
       </div>
 
-      
       <div className="border p-4 rounded-2xl flex flex-col gap-2 border-btn-border">
         <p>Upload Profile Photo</p>
         <div className="relative z-100">
@@ -141,6 +139,15 @@ const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
         </span>
         <span className={uploadState.length ? "flex justify-end" : "hidden"}>
           {uploadState}
+          <div className="flex gap-[1px]">
+            <span className="animate-bounce text-2xl">.</span>
+            <span className="animate-bounce [animation-delay:0.2s]  text-2xl">
+              .
+            </span>
+            <span className="animate-bounce [animation-delay:0.4s]  text-2xl">
+              .
+            </span>
+          </div>
         </span>
       </div>
 

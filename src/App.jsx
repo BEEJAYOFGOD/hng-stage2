@@ -50,6 +50,7 @@ function App() {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
+    window.scrollTo(0, 0);
 
     localStorage.setItem("pageIndex", currentStepIndex + 1);
     userJson = JSON.stringify(userEventDetails);
@@ -94,7 +95,7 @@ function App() {
         <div
           className={`border border-btn-border max-w-[43.75rem] rounded-4xl  p-5 m-auto md:bg-[#041E23] ${
             currentStepIndex != 2 ? "bg-[#08252B]" : "bg-[#041E23]"
-          }  mt-10`}
+          }  mt-10 `}
         >
           <div className="flex justify-between">
             <h1>
@@ -111,14 +112,15 @@ function App() {
 
           {/* progressbar */}
           <div
-            className={`bg-[#0e464e] relative before:absolute h-1 before:h-full ${
+            className={`bg-[#0e464e] relative before:absolute h-1 before:h-full before:transition-all before:duration-500 ${
               currentStepIndex == 0
                 ? "before:w-[50%]"
                 : currentStepIndex == 1
                 ? "before:w-[75%]"
                 : "before:w-[100%]"
-            }  before:bg-[#23a0b5] my-6 rounded-md before:rounded-md`}
+            } before:bg-[#23a0b5] my-6 rounded-md before:rounded-md`}
           ></div>
+
           {/* progressbar */}
 
           <form
@@ -149,6 +151,7 @@ function App() {
                 className="border border-next rounded-md py-2 flex-1 cursor-pointer"
                 onClick={() => {
                   localStorage.setItem("pageIndex", currentStepIndex - 1);
+                  window.scrollTo(0, 0);
 
                   if (isLastStep) {
                     setUserEventDetails(defualtUserInfo);
