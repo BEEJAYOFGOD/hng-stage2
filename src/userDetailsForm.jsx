@@ -88,8 +88,7 @@ const UserDetailsForm = ({ userName, email, profilePhoto, updateUserInfo }) => {
         <p>Step 2/ 3</p>
       </div>
 
-      <div className="bg-[#0e464e] relative before:absolute h-1 before:h-full before:w-[80%] before:bg-[#23a0b5] my-8 before:rounded-3xl rounded-3xl"></div>
-
+      
       <div className="border p-4 rounded-2xl flex flex-col gap-2 border-btn-border">
         <p>Upload Profile Photo</p>
         <div className="relative z-100">

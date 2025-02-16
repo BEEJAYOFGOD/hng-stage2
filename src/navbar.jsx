@@ -1,6 +1,5 @@
 import companyLogo from "./assets/compLogo.svg";
 import line from "./assets/Line.svg";
-import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (

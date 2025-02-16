@@ -16,7 +16,6 @@ const TicketShowcase = ({
 
         <p>Step 3 / 3</p>
       </div>
-      <div className="bg-[#0e464e] relative before:absolute before:left-0 h-1 before:h-full before:w-[90%] before:bg-[#23a0b5] my-8 before:rounded-2xl rounded-2xl"></div>
 
       <h3 className="md:text-4xl text-3xl font-bold font-alatsi">
         Your Ticket is Booked!

@@ -32,21 +32,23 @@ const SelectTicketForm = ({ noOfTicket, ticketType, updateUserInfo }) => {
     <>
       <div>
         <div className="rounded-2xl">
-          <h1>Ticket Selection</h1>
-          <p>Step 1 / 3</p>
-
-          <div className="bg-[#0e464e] relative before:absolute h-1 before:h-full before:w-[70%] before:bg-[#23a0b5] my-6 rounded-md before:rounded-md"></div>
-
           <div className="text-center event_div">
-            <h2 className="font-rage text-6xl leading-normal">
+            <h2 className="font-rage md:text-7xl text-5xl leading-normal">
               Techember Fest 25
             </h2>
-            <p>
+            <p className="md:w-sm md:m-auto text-sm leading-[1.5rem]">
               Join us for an unforgettable experience at [Event Name]! Secure
               your spot now
             </p>
-            <p>📍 [Event Location]</p>
-            <p>March 15, 2025 | 7:00Pm</p>
+
+            <div className="flex justify-center gap-4">
+              <p>📍 [Event Location]</p>
+              <p className="hidden md:flex">||</p>
+              <p>March 15, 2025 | 7:00Pm</p>
+            </div>
+            {/* <p className="md:inline">📍 [Event Location]</p>
+            <p className="md:inline mx-4 hidden">||</p>
+            <p className="md:inline">March 15, 2025 | 7:00Pm</p> */}
           </div>
         </div>
         <div className="bg-[#07373F] h-1 relative my-8"></div>

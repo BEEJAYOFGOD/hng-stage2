@@ -38,6 +38,7 @@ function App() {
     currentStepIndex,
     setCurrentStepIndex,
     step,
+    steps,
     isLastStep,
     next,
     back,
@@ -90,48 +91,75 @@ function App() {
       <main className="min-h-full bg-[#02191D] p-4 text-white font-roboto md:pb-32 md:bg-[radial-gradient(52.52%_32.71%_at_50%_97.66%,_rgba(36,160,181,0.2)_0%,_rgba(36,160,181,0)_100%)]">
         <Navbar />
 
-        <form
-          onSubmit={handleFormSubmit}
-          className="border border-btn-border rounded-2xl p-4 md:p-8 mt-8 max-w-[43.75rem] m-auto md:rounded-4xl bg-[#08252B]"
-        >
-          {step}
-
-          <div className="flex flex-col gap-4 md:flex-row-reverse md:gap-2">
-            <button
-              className="bg-next rounded-md py-2 flex-1 cursor-pointer"
-              type="submit"
-            >
-              {currentStepIndex == 0
-                ? "Next"
+        <div className="border border-btn-border max-w-[43.75rem] rounded-4xl  p-6 m-auto md:bg-[#041E23] bg-[#08252B] mt-10">
+          <div className="flex justify-between">
+            <h1>
+              {currentStepIndex === 0
+                ? "Ticket Selection"
                 : currentStepIndex == 1
-                ? "Get Your Free Tickets"
-                : "Download Ticket"}
-            </button>
-            <button
-              type="button"
-              className="border border-next rounded-md py-2 flex-1 cursor-pointer"
-              onClick={() => {
-                localStorage.setItem("pageIndex", currentStepIndex - 1);
-
-                if (isLastStep) {
-                  setUserEventDetails(defualtUserInfo);
-                  userJson = JSON.stringify(userEventDetails);
-                  localStorage.setItem("userJson", userJson);
-                  localStorage.setItem("pageIndex", 0);
-                  next();
-                } else {
-                  back();
-                }
-              }}
-            >
-              {currentStepIndex == 0
-                ? "Cancel"
-                : currentStepIndex == 1
-                ? "Back"
-                : "Book Another Ticket"}
-            </button>
+                ? " Attendee Details"
+                : "Ready"}
+            </h1>
+            <p>
+              {currentStepIndex + 1} / {steps.length}
+            </p>
           </div>
-        </form>
+
+          {/* progressbar */}
+          <div
+            className={`bg-[#0e464e] relative before:absolute h-1 before:h-full ${
+              currentStepIndex == 0
+                ? "before:w-[50%]"
+                : currentStepIndex == 1
+                ? "before:w-[75%]"
+                : "before:w-[100%]"
+            }  before:bg-[#23a0b5] my-6 rounded-md before:rounded-md`}
+          ></div>
+          {/* progressbar */}
+
+          <form
+            onSubmit={handleFormSubmit}
+            className="md:border md:border-btn-border rounded-2xl p-0 md:p-8 mt-8  m-auto md:rounded-4xl md:bg-[#08252B]"
+          >
+            {step}
+
+            <div className="flex flex-col gap-4 md:flex-row-reverse md:gap-2">
+              <button
+                className="bg-next rounded-md py-2 flex-1 cursor-pointer"
+                type="submit"
+              >
+                {currentStepIndex == 0
+                  ? "Next"
+                  : currentStepIndex == 1
+                  ? `Get Your ${userEventDetails.ticketType} Tickets`
+                  : "Download Ticket"}
+              </button>
+              <button
+                type="button"
+                className="border border-next rounded-md py-2 flex-1 cursor-pointer"
+                onClick={() => {
+                  localStorage.setItem("pageIndex", currentStepIndex - 1);
+
+                  if (isLastStep) {
+                    setUserEventDetails(defualtUserInfo);
+                    userJson = JSON.stringify(userEventDetails);
+                    localStorage.setItem("userJson", userJson);
+                    localStorage.setItem("pageIndex", 0);
+                    next();
+                  } else {
+                    back();
+                  }
+                }}
+              >
+                {currentStepIndex == 0
+                  ? "Cancel"
+                  : currentStepIndex == 1
+                  ? "Back"
+                  : "Book Another Ticket"}
+              </button>
+            </div>
+          </form>
+        </div>
       </main>
     </>
   );
