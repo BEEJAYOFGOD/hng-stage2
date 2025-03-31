@@ -19,11 +19,12 @@ function MultiStepForm() {
 
   const updateUserInfo = (event, value) => {
     setUserEventDetails((prev) => {
-      /// this is because of the asynchronous natureèof setState
+      /// this is because of the asynchronous nature of setState
       const updatedDetails = {
         ...prev,
         [event.target.name]: value,
       };
+
       localStorage.setItem("userJson", JSON.stringify(updatedDetails));
 
       return updatedDetails;
