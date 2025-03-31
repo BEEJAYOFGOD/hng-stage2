@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 const useMultiStepForm = (steps) => {
-  
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
   function next() {
+    localStorage.setItem("pageIndex", currentStepIndex + 1);
     setCurrentStepIndex((index) => {
       if (index >= steps.length - 1) return 0;
       return index + 1;

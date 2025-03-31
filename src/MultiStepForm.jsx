@@ -47,7 +47,9 @@ function MultiStepForm() {
     event.preventDefault();
     window.scrollTo(0, 0);
 
-    localStorage.setItem("pageIndex", currentStepIndex + 1);
+
+    
+
     localStorage.setItem("userJson", JSON.stringify(userEventDetails));
 
     if (currentStepIndex == 1) {
@@ -60,7 +62,8 @@ function MultiStepForm() {
       }
     }
 
-    if (currentStepIndex !== steps.length - 1) {
+    if (currentStepIndex <= steps.length - 2) {
+      
       next();
     }
 
