@@ -46,9 +46,6 @@ const SelectTicketForm = ({ noOfTicket, ticketType, updateUserInfo }) => {
               <p className="hidden md:flex">||</p>
               <p>March 15, 2025 | 7:00Pm</p>
             </div>
-            {/* <p className="md:inline">📍 [Event Location]</p>
-            <p className="md:inline mx-4 hidden">||</p>
-            <p className="md:inline">March 15, 2025 | 7:00Pm</p> */}
           </div>
         </div>
         <div className="bg-[#07373F] h-1 relative my-8"></div>
