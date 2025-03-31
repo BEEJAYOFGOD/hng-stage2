@@ -1,6 +1,6 @@
 import Ticket from "./ticket";
-import { useState } from "react";
 import RenderButton from "./RenderButton";
+import { useState } from "react";
 
 const AllTickets = () => {
   const allTickets = JSON.parse(localStorage.getItem("alltickets")) || [];
@@ -20,6 +20,12 @@ const AllTickets = () => {
 
   const isPrevDisabled = currentIndex === 0;
   const isNextDisabled = currentIndex === allTickets.length - 1;
+
+  // useEffect(() => {
+  //   let allTickets = JSON.parse(localStorage.getItem("alltickets")) || [];
+
+  //   setAllTickets(allTickets);
+  // }, []);
 
   return (
     <div className="text-center mt-12">
